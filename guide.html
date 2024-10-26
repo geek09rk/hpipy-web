@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HPIpy - Guide</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8JRFEX0K0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-E8JRFEX0K0');
+  </script>
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>HPIpy: Host-Pathogen Protein-Protein Interactions Prediction Tool</h1>
+        <nav>
+          <a href="index.html" class="custom-color"><i class="fas fa-home" style="margin-right: 3px;"></i> Home</a>
+          <a href="download.html" class="custom-color"><i class="fas fa-download" style="margin-right: 3px;"></i> Downloads</a>
+          <a href="guide.html" class="active custom-color"><i class="fas fa-book" style="margin-right: 3px;"></i> User Guide</a>
+        </nav>
+    </div>
+  </header>
+
+  <!-- sidebar -->
+  <!-- <div class="sidebar">
+    <h3 class="sidebar-heading"><a href="index.html" style="text-decoration: none; color: #333;"><i class="fas fa-home"></i> HPIpy</a></h3>
+    <ul>
+      <li><a href="#documentation"><i class="fas fa-file-alt" style="margin-right: 5px;"></i> Documentation</a></li>
+      <li><a href="#installation"><i class="fas fa-download" style="margin-right: 5px;"></i> Installation Instructions</a></li>
+      <li><a href="#usage"><i class="fas fa-cogs" style="margin-right: 5px;"></i> Usage</a></li>
+      <li><a href="#results"><i class="fas fa-chart-bar" style="margin-right: 5px;"></i> Exemplar Results</a></li>
+      <li><a href="#contact"><i class="fas fa-envelope" style="margin-right: 5px;"></i> Contact Us</a></li>
+    </ul>
+  </div> -->
+
+  <main>
+    <!-- Sub-menu for navigation -->
+    <div class="sub-menu">
+      <a href="#documentation"><i class="fas fa-file-alt" style="margin-right: 3px;"></i> <b>Documentation</b></a>
+      <a href="#installation"><i class="fas fa-cogs" style="margin-right: 3px;"></i> <b>Installation</b></a>
+      <a href="#usage"><i class="fas fa-terminal" style="margin-right: 3px;"></i> <b>Usage</b></a>
+      <a href="#results"><i class="fas fa-chart-bar" style="margin-right: 3px;"></i> <b>Example</b></a>
+      <a href="#contact"><i class="fas fa-envelope" style="margin-right: 3px;"></i> <b>Contact Us</b></a>
+    </div>
+    
+    <h2 id="documentation" style="text-align: center;">Documentation</h2>
+    <hr>
+    <p>
+      Welcome to the HPIpy's User Guide. This guide will help you get started and make the most of its features.
+    </p>
+
+    <br>
+
+    <h2 id="installation">Installation Instructions</h2>
+    <hr>
+
+    <h3>Step-by-step Installation</h3>
+    <ol>
+        <li>Install Miniconda (if not installed previously):</li>
+        <ul>
+            <li>Download Minconda from: <a href="https://docs.anaconda.com/free/miniconda/" target="_blank">Miniconda</a></li>
+            <li>Run <code>bash Miniconda3-latest-Linux-x86_64.sh</code></li>
+        </ul>
+    
+        <li>Obtain the package from <a href="download.html" target="_blank">Downloads page</a> or 
+          <a href="https://github.com/usubioinfo/hpipy" target="_blank">GitHub</a> and execute the following command accordingly:</li>
+        <ul>
+            <li><b>Decompress the file (if downloaded using link): </b></li>
+            <ul>
+                <li><code>tar -xvzf hpipy.tar.gz</code></li>
+            </ul>
+        </ul>
+        <p>
+          After downloading (and extracting) the package files from one of the above sources, execute:
+        </p>
+            <ul>
+              <li><code>cd hpipy</code></li>
+              <li><code>conda env create -f environment.yml</code></li>
+              <li><code>conda activate hpipy</code></li>
+            </ul>
+    </ol>
+
+    <br>
+
+    <h2 id="usage">Usage</h2>
+    
+    <hr>
+
+    <h3>Package Help</h3>
+    <p>
+      To see the different options available in HPIpy, see package help:
+    </p>
+    <div>
+      <ul><code><b>python3 -m hpipy --help</b></code></ul>
+    </div>
+
+    <hr class="custom">
+
+    <h3>Basic Usage</h3>
+    <p>
+      For basic usage, provide the path to your input protein sequence files (<b>fasta</b> / <b>fa</b> / <b>faa</b> format only - compressed formats are 
+      also accepted) for host and pathogen species, and choose the respective model suitable to your species. 
+    </p>
+    <div>
+      <ul><code><b>python3 -m hpipy --host hostProt.fasta --pathogen pathogenProt.fasta --model model_name</b></code></ul>
+    </div>
+
+    <hr class="custom">
+
+    <p>
+      Download the sample host and pathogen protein sequences provided below to run HPIpy:
+    </p>
+    
+    <button class="download-button" onclick="downloadFile('hostProteins.fasta')">Download Example Host Sequences</button>
+    <button class="download-button" onclick="downloadFile('pathogenProteins.fasta')">Download Example Pathogen Sequences</button>
+
+    <hr class="custom">
+
+    <h3>Advanced Options</h3>
+    <p>
+      For enhanced analysis, additional (optional) arguments can be used as needed. See package "Help" below. If you want to predict the interactions 
+      again using different parameters such as BLAST identity, coverage, phylogenetic profiling threshold, etc., use the <code>resume_ppis</code> 
+      option. This will not re-run the computationally intensive programs (BLAST, HMMER, etc.) again, and will resume the pipeline from 
+      the predictions step.
+    </p>
+
+    <pre>
+      <code>
+        usage: python3 -m hpipy [options]
+
+          hpipy: A package to predict host-microbe protein-protein interactions
+          ---------------------------------------------------------------------
+
+          To obtain more information about the package, visit: https://kaabil.net/hpipy/
+                                        
+
+          options:
+            -h, --help            show this help message and exit
+
+          Required arguments:
+            --host <hostFastaFile>
+                                  Protein sequences of host species (formats accepted: .fasta, .fasta.gz, .fasta.zip, .fa, .fa.gz, .fa.zip, .faa, .faa.gz, .faa.zip)
+            --pathogen <pathogenFastaFile>
+                                  Protein sequences of pathogen species (formats accepted: .fasta, .fasta.gz, .fasta.zip, .fa, .fa.gz, .fa.zip, .faa, .faa.gz, .faa.zip)
+            --model <choose model>
+                                  Host-pathogen model to be implemented for the analysis. Available models: 
+                                  plantPathogen, animalPathogen, humanVirus, humanBacteria
+
+          Optional Arguments:
+            --version             Display package version and exit
+            --outputdir <results directory>
+                                  Directory where output files will be written; default: "HPIpy_results"
+            --use_slurm           To run jobs using SLURM job scheduler
+            --slurm_account       To run SLURM jobs on a specific account on the cluster
+            --network             To perform network analysis for the predicted interactions. This step will 
+                                  take more time based on the number of predicted interactions.
+            --num_threads <int>        Number of threads to be used; default: 4
+            --seq_homology <float>       Sequence identity for CD-HIT (0.1 to 1.0); default: 1.0 (100 percent)
+            --resume_ppis         To predict interactions using different parameters without running the whole pipeline. Provide 
+                                  'interproscan' option if it was used before, although it will no be executed again if interproscan's 
+                                  output files already exist; default is false
+
+          Interolog model prediction arguments (optional):
+            --interIdentity <int>      Sequence identity to filter BLAST alignments. Provide a space-separated list;
+                                   default: 50
+            --interCoverage <int> 
+                                  Sequence coverage to filter BLAST alignments. Provide a space-separated list;
+                                   default: 50
+            --interEvalue <str> 
+                                  e-value to filter BLAST alignments. Provide a space-separated list;
+                                   default: 1e-05
+
+          Domain model prediction arguments (optional):
+            --domHostEvalue <str>     e-value to filter host HMMER output; default is based on the selected model
+            --domPathogenEvalue <str> e-value to filter pathogen HMMER output; default is based on the selected model
+
+          Phylogenetic profiling model prediction arguments (optional):
+            --genome_pool <choose pool>       Genome pool to be used for phylogenetic profiling model. Available pools: UP82, 
+                                 BC20, protPhylo490; default: BC20
+            --phyloEvalue <str>       e-value to filter DIAMOND BLAST alignments; default: 1e-05
+            --phyloIdentity <int>     Sequence identity to filter DIAMOND BLAST alignments; default: 50
+            --phyloCoverage <int>     Sequence coverage to filter DIAMOND BLAST alignments; default: 50
+            --phyloThreshold <float>    Threshold value to filter predicted interactions based on phylogenetic 
+                                 distance (0.1 to 1.0); default: 0.9
+
+          GO sematic similarity model prediction arguments (optional):
+            --interproscan        To run InterProScan locally to obtain GO terms for GO similarity model. 
+                                  InterProScan should be installed locally
+            --hostGOFile <Host GO terms file>         GO terms of host proteins in comma- or tab-separated format
+            --pathogenGOFile <Pathogen GO terms file>     GO terms of pathogen proteins in comma- or tab-separated format
+            --go_combine <choose combine method>         Method to combine GO similarity scores. Available methods: max, avg, 
+                                  rcmax and BMA; default: BMA
+            --goSimThreshold <float>     Threshold value to filter predicted interactions based on GO semantic 
+                                  similarity (0.1 to 1.0); default: 0.9
+      </code>
+    </pre>
+
+    <br>
+
+    <h2 id="results">Exemplar Results</h2>
+    <hr>
+
+    <p>
+      Below are files/directories of the results generated by HPIpy for "human-virus" model to help you understand the output:
+    </p>
+
+    <pre>
+      <code>
+        .
+        ├── 1_Clustering
+        │   ├── human.fasta
+        │   ├── human.fasta.clstr
+        │   ├── MT903344.fasta
+        │   └── MT903344.fasta.clstr
+        ├── 2_Alignment
+        │   ├── Interolog
+        │   │   ├── human_biogrid_blast.txt
+        │   │   ├── human_dip_blast.txt
+        │   │   ├── human_hpidb_blast.txt
+        │   │   ├── human_intact_blast.txt
+        │   │   ├── human_mint_blast.txt
+        │   │   ├── human_virhostnet_blast.txt
+        │   │   ├── MT903344_biogrid_blast.txt
+        │   │   ├── MT903344_dip_blast.txt
+        │   │   ├── MT903344_hpidb_blast.txt
+        │   │   ├── MT903344_intact_blast.txt
+        │   │   ├── MT903344_mint_blast.txt
+        │   │   └── MT903344_virhostnet_blast.txt
+        │   └── PhyloProfiling
+        │       ├── Anopheles_gambiae_human_blastOut.txt
+        │       ├── Anopheles_gambiae_MT903344_blastOut.txt
+        │       ├── Arabidopsis_thaliana_human_blastOut.txt
+        │       ├── Arabidopsis_thaliana_MT903344_blastOut.txt
+        │       ├── Bos_taurus_human_blastOut.txt
+        │       ├── Bos_taurus_MT903344_blastOut.txt
+        │       ├── Caenorhabditis_elegans_human_blastOut.txt
+        │       ├── Caenorhabditis_elegans_MT903344_blastOut.txt
+        │       ├── Canis_lupus_familiaris_human_blastOut.txt
+        │       ├── Canis_lupus_familiaris_MT903344_blastOut.txt
+        │       ├── Danio_rerio_human_blastOut.txt
+        │       ├── Danio_rerio_MT903344_blastOut.txt
+        │       ├── Drosophila_melanogaster_human_blastOut.txt
+        │       ├── Drosophila_melanogaster_MT903344_blastOut.txt
+        │       ├── Escherichia_coli_K12_human_blastOut.txt
+        │       ├── Escherichia_coli_K12_MT903344_blastOut.txt
+        │       ├── Escherichia_coli_Sakai_human_blastOut.txt
+        │       ├── Escherichia_coli_Sakai_MT903344_blastOut.txt
+        │       ├── Gallus_gallus_human_blastOut.txt
+        │       ├── Gallus_gallus_MT903344_blastOut.txt
+        │       ├── Homo_sapiens_human_blastOut.txt
+        │       ├── Homo_sapiens_MT903344_blastOut.txt
+        │       ├── Macaca_mulatta_human_blastOut.txt
+        │       ├── Macaca_mulatta_MT903344_blastOut.txt
+        │       ├── Mus_musculus_human_blastOut.txt
+        │       ├── Mus_musculus_MT903344_blastOut.txt
+        │       ├── Myxococcus_xanthus_human_blastOut.txt
+        │       ├── Myxococcus_xanthus_MT903344_blastOut.txt
+        │       ├── Pan_troglodytes_human_blastOut.txt
+        │       ├── Pan_troglodytes_MT903344_blastOut.txt
+        │       ├── Plasmodium_human_blastOut.txt
+        │       ├── Plasmodium_MT903344_blastOut.txt
+        │       ├── Rattus_norvegicus_human_blastOut.txt
+        │       ├── Rattus_norvegicus_MT903344_blastOut.txt
+        │       ├── Saccharomyces_cerevisiae_human_blastOut.txt
+        │       ├── Saccharomyces_cerevisiae_MT903344_blastOut.txt
+        │       ├── Sus_scrofa_human_blastOut.txt
+        │       ├── Sus_scrofa_MT903344_blastOut.txt
+        │       ├── Xenopus_laevis_human_blastOut.txt
+        │       └── Xenopus_laevis_MT903344_blastOut.txt
+        ├── 3_Domains
+        │   ├── human_did3_hmmscan.txt
+        │   ├── human_domine_hmmscan.txt
+        │   ├── human_hmmscan.txt
+        │   ├── human_iddi_hmmscan.txt
+        │   ├── MT903344_did3_hmmscan.txt
+        │   ├── MT903344_domine_hmmscan.txt
+        │   ├── MT903344_hmmscan.txt
+        │   └── MT903344_iddi_hmmscan.txt
+        ├── 4_Predictions
+        │   ├── Domain-based
+        │   │   ├── did3_PPI.csv
+        │   │   ├── Domain_Annotations.txt
+        │   │   ├── Domain_PPIs.csv
+        │   │   ├── domine_PPI.csv
+        │   │   └── iddi_PPI.csv
+        │   ├── GOSimilarity-based
+        │   │   └── GOSimilarity_PPIs.csv
+        │   ├── Interolog-based
+        │   │   └── 50_1e-05_50
+        │   ├── PhyloProfiling-based
+        │   │   └── PhyloProfiling_PPIs.csv
+        │   └── Prediction_Stats.xlsx
+        ├── 5_Network_Analysis
+        │   └── 50_1e-05_50
+        │       ├── Betweenness_centrality.xlsx
+        │       ├── Closeness_centrality.xlsx
+        │       ├── Degree_centrality.xlsx
+        │       ├── network.gml
+        │       └── Protein_hubs.xlsx
+        ├── HPIpy.log
+        └── logs
+            ├── hmmpress.log
+            ├── human_blastdb_biogrid.log
+            ├── human_blastdb_dip.log
+            ├── human_blastdb_hpidb.log
+            ├── human_blastdb_intact.log
+            ├── human_blastdb_mint.log
+            ├── human_blastdb_virhostnet.log
+            ├── human_cdhit_out.log
+            ├── human_hmmscan.log
+            ├── MT903344_blastdb_biogrid.log
+            ├── MT903344_blastdb_dip.log
+            ├── MT903344_blastdb_hpidb.log
+            ├── MT903344_blastdb_intact.log
+            ├── MT903344_blastdb_mint.log
+            ├── MT903344_blastdb_virhostnet.log
+            ├── MT903344_cdhit_out.log
+            └── MT903344_hmmscan.log
+      </code>
+    </pre>
+    
+    <br>
+    
+    <h2 id="contact">Contact Us</h2>
+    <hr>
+    <p>
+      For any queries, contact us at <a href="mailto:raghav.kataria@usu.edu">bioinfo@kaabil.net</a>.
+    </p>
+
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i>Top</a>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p style="font-size:18px";>&copy; 2024</p>
+      <a href="https://kaabil.net/" target="_blank">
+        <img src="assets/images/kaabil_logo.png" alt="KAABiL Logo" class="footer-logo" style="height: 50px">
+      </a>
+      <a href="https://www.usu.edu/" target="_blank">
+        <img src="assets/images/usu_logo_blue.png" alt="USU Logo" class="footer-logo" style="height: 40px">
+      </a>
+      
+    </div>
+  </footer>
+
+  <!-- back to top -->
+  <script>
+    window.onscroll = function() {scrollFunction()};
+  
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.querySelector('.back-to-top').style.display = 'block';
+      } else {
+        document.querySelector('.back-to-top').style.display = 'none';
+      }
+    }
+  
+    document.querySelector('.back-to-top').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    });
+  </script>
+
+  <script>
+    function downloadFile(filename) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(getFileContent(filename)));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
+
+    function getFileContent(filename) {
+        if (filename === 'hostProteins.fasta') {
+            return getFileFromDirectory('hostProteins.fasta');
+        } else if (filename === 'pathogenProteins.fasta') {
+            return getFileFromDirectory('pathogenProteins.fasta');
+        } else {
+            return '';
+        }
+    }
+
+    function getFileFromDirectory(filename) {
+        var fileContent = '';
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    fileContent = xhr.responseText;
+                }
+            }
+        };
+        xhr.open('GET', 'exampleData/' + filename, false);
+        xhr.send();
+        return fileContent;
+    }
+  </script>
+    
+</body>
+</html>

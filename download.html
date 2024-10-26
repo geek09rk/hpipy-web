@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HPIpy - Downloads</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8JRFEX0K0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-E8JRFEX0K0');
+  </script>
+
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>HPIpy: Host-Pathogen Protein-Protein Interactions Prediction Tool</h1>
+        <nav>
+          <a href="index.html" class="custom-color"><i class="fas fa-home" style="margin-right: 3px;"></i> Home</a>
+          <a href="download.html" class="active custom-color"><i class="fas fa-download" style="margin-right: 3px;"></i> Downloads</a>
+          <a href="guide.html" class="custom-color"><i class="fas fa-book" style="margin-right: 3px;"></i> User Guide</a>
+        </nav>
+    </div>
+  </header>
+
+  <main>
+    <h2 style="text-align: center;">Let's Get Started</h2>
+    <hr>
+    <p>
+      On this page, you can download HPIpy package, and find additional resources to help you get started.
+    </p>
+
+    <br>
+
+    <h2>Download</h2>
+    <hr>
+    <p>
+      Obtain the latest version of HPIpy using one of the options below:
+    </p>
+    <ol>
+      <li><b>Using link: </b>
+        <code>wget https://kaabil.net/hpipy/downloads/hpipy.tar.gz</code>
+      </li>
+      <br>
+      <li><b>Clone GitHub repository: </b>
+        <code>git clone https://github.com/usubioinfo/hpipy.git</code>
+      </li>
+    </ol>
+
+    <br>
+
+    <h2>Installation Instructions</h2>
+    <hr>
+    <p>
+      For detailed installation instructions, please refer to the instructions on the <a href="guide.html" target="_blank">User Guide</a> page.
+    </p>
+    <hr class="custom">
+    <h3>Dependencies</h3>
+    <ul>
+      <li style="font-size: 17px;">For Gene Ontology (GO) Similarity model, InterProScan is required to be installed locally, which can be obtained 
+        from <a href="https://www.ebi.ac.uk/interpro/download/InterProScan/" target="_blank">InterPro</a>.</li>
+      <li style="font-size: 17px;">Alternatively, the users can provide 2 files (one for host and other for pathogen species) containing protein IDs 
+        and their respective GO term(s) in a comma- or tab-separated file</li>
+    </ul>
+
+    <br>
+
+    <h2>Source Code</h2>
+    <p>
+      The source code for HPIpy is also available on GitHub. You can clone or download the repository using the button below:
+    </p>
+    <div>
+      <a href="https://github.com/usubioinfo/hpipy" class="download-button" target="_blank">Download from GitHub</a>
+    </div>
+
+    <br>
+
+    <h2>Interaction Databases</h2>
+    <hr>
+    <p>
+      Various standard protein-protein and domain-domain interaction databases that were used as templates for the predictions are mentioned below. 
+      The interaction data from these databases was stringently filtered according to the available models.
+    </p>
+
+    <div class="logo-row">
+      <a href="https://thebiogrid.org/" target="_blank">
+        <img src="assets/images/dbs/biogrid.jpeg" alt="BioGRID">
+      </a>
+      <a href="http://dip.doe-mbi.ucla.edu/dip/Main.cgi" target="_blank">
+        <img src="assets/images/dbs/dip.png" alt="DIP">
+      </a>
+      <a href="https://hpidb.igbb.msstate.edu/" target="_blank">
+        <img src="assets/images/dbs/hpidb.png" alt="HPIDB">
+      </a>
+      <a href="https://www.ebi.ac.uk/intact/" target="_blank">
+        <img src="assets/images/dbs/intact.png" alt="IntAct">
+      </a>
+      <a href="https://mint.bio.uniroma2.it/" target="_blank">
+        <img src="assets/images/dbs/mint.png" alt="MINT">
+      </a>
+      <a href="http://virhostnet.prabi.fr/" target="_blank">
+        <img src="assets/images/dbs/virhostnet.png" alt="VirHostNet">
+      </a>
+      <a href="http://3did.irbbarcelona.org/" target="_blank">
+        <img src="assets/images/dbs/3did.png" alt="3did">
+      </a>
+      <a href="https://manticore.niehs.nih.gov/cgi-bin/Domine" target="_blank">
+        <img src="assets/images/dbs/domine.jpeg" alt="DOMINE">
+      </a>
+      <a href=" http://pcode.kaist.ac.kr/iddi/" target="_blank">
+        <span><b>IDDI</b></span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p style="font-size:18px";>&copy; 2024</p>
+      <a href="https://kaabil.net/" target="_blank">
+        <img src="assets/images/kaabil_logo.png" alt="KAABiL Logo" class="footer-logo" style="height: 50px">
+      </a>
+      <a href="https://www.usu.edu/" target="_blank">
+        <img src="assets/images/usu_logo_blue.png" alt="USU Logo" class="footer-logo" style="height: 40px">
+      </a>
+
+    </div>
+  </footer>
+</body>
+</html>
