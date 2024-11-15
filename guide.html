@@ -32,18 +32,6 @@
     </div>
   </header>
 
-  <!-- sidebar -->
-  <!-- <div class="sidebar">
-    <h3 class="sidebar-heading"><a href="index.html" style="text-decoration: none; color: #333;"><i class="fas fa-home"></i> HPIpy</a></h3>
-    <ul>
-      <li><a href="#documentation"><i class="fas fa-file-alt" style="margin-right: 5px;"></i> Documentation</a></li>
-      <li><a href="#installation"><i class="fas fa-download" style="margin-right: 5px;"></i> Installation Instructions</a></li>
-      <li><a href="#usage"><i class="fas fa-cogs" style="margin-right: 5px;"></i> Usage</a></li>
-      <li><a href="#results"><i class="fas fa-chart-bar" style="margin-right: 5px;"></i> Exemplar Results</a></li>
-      <li><a href="#contact"><i class="fas fa-envelope" style="margin-right: 5px;"></i> Contact Us</a></li>
-    </ul>
-  </div> -->
-
   <main>
     <!-- Sub-menu for navigation -->
     <div class="sub-menu">
@@ -70,13 +58,14 @@
         <li>Install Miniconda (if not installed previously):</li>
         <ul>
             <li>Download Minconda from: <a href="https://docs.anaconda.com/free/miniconda/" target="_blank">Miniconda</a></li>
-            <li>Run <code>bash Miniconda3-latest-Linux-x86_64.sh</code></li>
+            <li>To install, run: <code>bash Miniconda3-latest-Linux-x86_64.sh</code></li>
+            <li>Check conda installation using: <code>conda --version</code></li>
         </ul>
     
         <li>Obtain the package from <a href="download.html" target="_blank">Downloads page</a> or 
           <a href="https://github.com/usubioinfo/hpipy" target="_blank">GitHub</a> and execute the following command accordingly:</li>
         <ul>
-            <li><b>Decompress the file (if downloaded using link): </b></li>
+            <li><b>Decompress the file (if using compressed version): </b></li>
             <ul>
                 <li><code>tar -xvzf hpipy.tar.gz</code></li>
             </ul>
@@ -109,21 +98,12 @@
 
     <h3>Basic Usage</h3>
     <p>
-      For basic usage, provide the path to your input protein sequence files (<b>fasta</b> / <b>fa</b> / <b>faa</b> format only - compressed formats are 
-      also accepted) for host and pathogen species, and choose the respective model suitable to your species. 
+      For basic usage, provide the path to your input protein sequence files (<b>fasta</b> / <b>fa</b> / <b>faa</b> format only; their compressed formats are 
+      also accepted) for host and pathogen species, and choose the respective model suitable to your species (below example is for "humanVirus" model). 
     </p>
     <div>
-      <ul><code><b>python3 -m hpipy --host hostProt.fasta --pathogen pathogenProt.fasta --model model_name</b></code></ul>
+      <ul><code><b>python3 -m hpipy --host exampleData/hostProteins.fasta --pathogen exampleData/pathogenProteins.fasta --model humanVirus --computation interolog</b></code></ul>
     </div>
-
-    <hr class="custom">
-
-    <p>
-      Download the sample host and pathogen protein sequences provided below to run HPIpy:
-    </p>
-    
-    <button class="download-button" onclick="downloadFile('hostProteins.fasta')">Download Example Host Sequences</button>
-    <button class="download-button" onclick="downloadFile('pathogenProteins.fasta')">Download Example Pathogen Sequences</button>
 
     <hr class="custom">
 
@@ -149,60 +129,49 @@
             -h, --help            show this help message and exit
 
           Required arguments:
-            --host <hostFastaFile>
-                                  Protein sequences of host species (formats accepted: .fasta, .fasta.gz, .fasta.zip, .fa, .fa.gz, .fa.zip, .faa, .faa.gz, .faa.zip)
-            --pathogen <pathogenFastaFile>
-                                  Protein sequences of pathogen species (formats accepted: .fasta, .fasta.gz, .fasta.zip, .fa, .fa.gz, .fa.zip, .faa, .faa.gz, .faa.zip)
-            --model <choose model>
-                                  Host-pathogen model to be implemented for the analysis. Available models: 
-                                  plantPathogen, animalPathogen, humanVirus, humanBacteria
+            --host                Protein sequences of host species (formats accepted: .fasta, .fasta.gz, .fasta.zip, .fa, .fa.gz, .fa.zip, .faa, .faa.gz, .faa.zip)
+            --pathogen            Protein sequences of pathogen species (formats accepted: .fasta, .fasta.gz, .fasta.zip, .fa, .fa.gz, .fa.zip, .faa, .faa.gz, .faa.zip)
+            --computation         Computational method(s) to be implemented for the analysis. Provide a space-separated list;
+                                  Available methods: interolog, domain, phyloProfiling, gosim
+            --model               Host-pathogen model to be implemented for the analysis;
+                                  Available models: plantPathogen, animalPathogen, humanVirus, humanBacteria
 
           Optional Arguments:
             --version             Display package version and exit
-            --outputdir <results directory>
-                                  Directory where output files will be written; default: "HPIpy_results"
+            --outputdir           Directory where output files will be written; default: "HPIpy_results"
             --use_slurm           To run jobs using SLURM job scheduler
             --slurm_account       To run SLURM jobs on a specific account on the cluster
             --network             To perform network analysis for the predicted interactions. This step will 
                                   take more time based on the number of predicted interactions.
-            --num_threads <int>        Number of threads to be used; default: 4
-            --seq_homology <float>       Sequence identity for CD-HIT (0.1 to 1.0); default: 1.0 (100 percent)
+            --num_threads         Number of threads to be used; default: 4
+            --seq_homology        Sequence identity for CD-HIT (0.1 to 1.0); default: 1.0 (100 percent)
             --resume_ppis         To predict interactions using different parameters without running the whole pipeline. Provide 
                                   'interproscan' option if it was used before, although it will no be executed again if interproscan's 
-                                  output files already exist; default is false
+                                  output files already exist
 
           Interolog model prediction arguments (optional):
-            --interIdentity <int>      Sequence identity to filter BLAST alignments. Provide a space-separated list;
-                                   default: 50
-            --interCoverage <int> 
-                                  Sequence coverage to filter BLAST alignments. Provide a space-separated list;
-                                   default: 50
-            --interEvalue <str> 
-                                  e-value to filter BLAST alignments. Provide a space-separated list;
-                                   default: 1e-05
+            --interIdentity       Sequence identity to filter BLAST alignments; default: 50
+            --interCoverage       Sequence coverage to filter BLAST alignments; default: 50
+            --interEvalue         e-value to filter BLAST alignments; default: 1e-05
 
           Domain model prediction arguments (optional):
-            --domHostEvalue <str>     e-value to filter host HMMER output; default is based on the selected model
-            --domPathogenEvalue <str> e-value to filter pathogen HMMER output; default is based on the selected model
+            --domHostEvalue       e-value to filter host HMMER output; default is based on the selected model
+            --domPathogenEvalue   e-value to filter pathogen HMMER output; default is based on the selected model
 
           Phylogenetic profiling model prediction arguments (optional):
-            --genome_pool <choose pool>       Genome pool to be used for phylogenetic profiling model. Available pools: UP82, 
-                                 BC20, protPhylo490; default: BC20
-            --phyloEvalue <str>       e-value to filter DIAMOND BLAST alignments; default: 1e-05
-            --phyloIdentity <int>     Sequence identity to filter DIAMOND BLAST alignments; default: 50
-            --phyloCoverage <int>     Sequence coverage to filter DIAMOND BLAST alignments; default: 50
-            --phyloThreshold <float>    Threshold value to filter predicted interactions based on phylogenetic 
-                                 distance (0.1 to 1.0); default: 0.9
+            --genome_pool         Genome pool to be used for phylogenetic profiling model; Available pools: UP82, 
+                                  BC20, protPhylo490; default: BC20
+            --phyloEvalue         e-value to filter DIAMOND BLAST alignments; default: 1e-05
+            --phyloIdentity       Sequence identity to filter DIAMOND BLAST alignments; default: 50
+            --phyloCoverage       Sequence coverage to filter DIAMOND BLAST alignments; default: 50
+            --phyloThreshold      Threshold value to filter predicted interactions based on phylogenetic distance (0.1 to 1.0); default: 0.9
 
-          GO sematic similarity model prediction arguments (optional):
-            --interproscan        To run InterProScan locally to obtain GO terms for GO similarity model. 
-                                  InterProScan should be installed locally
-            --hostGOFile <Host GO terms file>         GO terms of host proteins in comma- or tab-separated format
-            --pathogenGOFile <Pathogen GO terms file>     GO terms of pathogen proteins in comma- or tab-separated format
-            --go_combine <choose combine method>         Method to combine GO similarity scores. Available methods: max, avg, 
-                                  rcmax and BMA; default: BMA
-            --goSimThreshold <float>     Threshold value to filter predicted interactions based on GO semantic 
-                                  similarity (0.1 to 1.0); default: 0.9
+          GO semantic similarity model prediction arguments (optional):
+            --interproscan        To run InterProScan locally to obtain GO terms for GO similarity model; InterProScan should be installed locally
+            --hostGOFile          Comma- or tab-separated file containing GO terms of host proteins
+            --pathogenGOFile      Comma- or tab-separated file containing GO terms of pathogen proteins
+            --go_combine          Method to combine GO similarity scores. Available methods: max, avg, rcmax and BMA; default: BMA
+            --goSimThreshold      Threshold value to filter predicted interactions based on GO semantic similarity (0.1 to 1.0); default: 0.9
       </code>
     </pre>
 
@@ -217,116 +186,81 @@
 
     <pre>
       <code>
-        .
-        ├── 1_Clustering
-        │   ├── human.fasta
-        │   ├── human.fasta.clstr
-        │   ├── MT903344.fasta
-        │   └── MT903344.fasta.clstr
-        ├── 2_Alignment
-        │   ├── Interolog
-        │   │   ├── human_biogrid_blast.txt
-        │   │   ├── human_dip_blast.txt
-        │   │   ├── human_hpidb_blast.txt
-        │   │   ├── human_intact_blast.txt
-        │   │   ├── human_mint_blast.txt
-        │   │   ├── human_virhostnet_blast.txt
-        │   │   ├── MT903344_biogrid_blast.txt
-        │   │   ├── MT903344_dip_blast.txt
-        │   │   ├── MT903344_hpidb_blast.txt
-        │   │   ├── MT903344_intact_blast.txt
-        │   │   ├── MT903344_mint_blast.txt
-        │   │   └── MT903344_virhostnet_blast.txt
-        │   └── PhyloProfiling
-        │       ├── Anopheles_gambiae_human_blastOut.txt
-        │       ├── Anopheles_gambiae_MT903344_blastOut.txt
-        │       ├── Arabidopsis_thaliana_human_blastOut.txt
-        │       ├── Arabidopsis_thaliana_MT903344_blastOut.txt
-        │       ├── Bos_taurus_human_blastOut.txt
-        │       ├── Bos_taurus_MT903344_blastOut.txt
-        │       ├── Caenorhabditis_elegans_human_blastOut.txt
-        │       ├── Caenorhabditis_elegans_MT903344_blastOut.txt
-        │       ├── Canis_lupus_familiaris_human_blastOut.txt
-        │       ├── Canis_lupus_familiaris_MT903344_blastOut.txt
-        │       ├── Danio_rerio_human_blastOut.txt
-        │       ├── Danio_rerio_MT903344_blastOut.txt
-        │       ├── Drosophila_melanogaster_human_blastOut.txt
-        │       ├── Drosophila_melanogaster_MT903344_blastOut.txt
-        │       ├── Escherichia_coli_K12_human_blastOut.txt
-        │       ├── Escherichia_coli_K12_MT903344_blastOut.txt
-        │       ├── Escherichia_coli_Sakai_human_blastOut.txt
-        │       ├── Escherichia_coli_Sakai_MT903344_blastOut.txt
-        │       ├── Gallus_gallus_human_blastOut.txt
-        │       ├── Gallus_gallus_MT903344_blastOut.txt
-        │       ├── Homo_sapiens_human_blastOut.txt
-        │       ├── Homo_sapiens_MT903344_blastOut.txt
-        │       ├── Macaca_mulatta_human_blastOut.txt
-        │       ├── Macaca_mulatta_MT903344_blastOut.txt
-        │       ├── Mus_musculus_human_blastOut.txt
-        │       ├── Mus_musculus_MT903344_blastOut.txt
-        │       ├── Myxococcus_xanthus_human_blastOut.txt
-        │       ├── Myxococcus_xanthus_MT903344_blastOut.txt
-        │       ├── Pan_troglodytes_human_blastOut.txt
-        │       ├── Pan_troglodytes_MT903344_blastOut.txt
-        │       ├── Plasmodium_human_blastOut.txt
-        │       ├── Plasmodium_MT903344_blastOut.txt
-        │       ├── Rattus_norvegicus_human_blastOut.txt
-        │       ├── Rattus_norvegicus_MT903344_blastOut.txt
-        │       ├── Saccharomyces_cerevisiae_human_blastOut.txt
-        │       ├── Saccharomyces_cerevisiae_MT903344_blastOut.txt
-        │       ├── Sus_scrofa_human_blastOut.txt
-        │       ├── Sus_scrofa_MT903344_blastOut.txt
-        │       ├── Xenopus_laevis_human_blastOut.txt
-        │       └── Xenopus_laevis_MT903344_blastOut.txt
-        ├── 3_Domains
-        │   ├── human_did3_hmmscan.txt
-        │   ├── human_domine_hmmscan.txt
-        │   ├── human_hmmscan.txt
-        │   ├── human_iddi_hmmscan.txt
-        │   ├── MT903344_did3_hmmscan.txt
-        │   ├── MT903344_domine_hmmscan.txt
-        │   ├── MT903344_hmmscan.txt
-        │   └── MT903344_iddi_hmmscan.txt
-        ├── 4_Predictions
-        │   ├── Domain-based
-        │   │   ├── did3_PPI.csv
-        │   │   ├── Domain_Annotations.txt
-        │   │   ├── Domain_PPIs.csv
-        │   │   ├── domine_PPI.csv
-        │   │   └── iddi_PPI.csv
-        │   ├── GOSimilarity-based
-        │   │   └── GOSimilarity_PPIs.csv
-        │   ├── Interolog-based
-        │   │   └── 50_1e-05_50
-        │   ├── PhyloProfiling-based
-        │   │   └── PhyloProfiling_PPIs.csv
-        │   └── Prediction_Stats.xlsx
-        ├── 5_Network_Analysis
-        │   └── 50_1e-05_50
-        │       ├── Betweenness_centrality.xlsx
-        │       ├── Closeness_centrality.xlsx
-        │       ├── Degree_centrality.xlsx
-        │       ├── network.gml
-        │       └── Protein_hubs.xlsx
+        HPIpy_results
+        ├── Alignment
+        │   └── Interolog
+        │       ├── hostProteins_biogrid_blast.txt
+        │       ├── hostProteins_dip_blast.txt
+        │       ├── hostProteins_hpidb_blast.txt
+        │       ├── hostProteins_intact_blast.txt
+        │       ├── hostProteins_mint_blast.txt
+        │       ├── hostProteins_virhostnet_blast.txt
+        │       ├── pathogenProteins_biogrid_blast.txt
+        │       ├── pathogenProteins_dip_blast.txt
+        │       ├── pathogenProteins_hpidb_blast.txt
+        │       ├── pathogenProteins_intact_blast.txt
+        │       ├── pathogenProteins_mint_blast.txt
+        │       └── pathogenProteins_virhostnet_blast.txt
+        ├── Clustering
+        │   ├── hostProteins.fasta
+        │   ├── hostProteins.fasta.clstr
+        │   ├── pathogenProteins.fasta
+        │   └── pathogenProteins.fasta.clstr
+        ├── Domains
+        │   ├── hostProteins_did3_domains.txt
+        │   ├── hostProteins_domains.txt
+        │   ├── hostProteins_domine_domains.txt
+        │   ├── hostProteins_iddi_domains.txt
+        │   ├── pathogenProteins_did3_domains.txt
+        │   ├── pathogenProteins_domains.txt
+        │   ├── pathogenProteins_domine_domains.txt
+        │   └── pathogenProteins_iddi_domains.txt
         ├── HPIpy.log
-        └── logs
-            ├── hmmpress.log
-            ├── human_blastdb_biogrid.log
-            ├── human_blastdb_dip.log
-            ├── human_blastdb_hpidb.log
-            ├── human_blastdb_intact.log
-            ├── human_blastdb_mint.log
-            ├── human_blastdb_virhostnet.log
-            ├── human_cdhit_out.log
-            ├── human_hmmscan.log
-            ├── MT903344_blastdb_biogrid.log
-            ├── MT903344_blastdb_dip.log
-            ├── MT903344_blastdb_hpidb.log
-            ├── MT903344_blastdb_intact.log
-            ├── MT903344_blastdb_mint.log
-            ├── MT903344_blastdb_virhostnet.log
-            ├── MT903344_cdhit_out.log
-            └── MT903344_hmmscan.log
+        ├── logs
+        │   ├── hmmpress.log
+        │   ├── hostProteins_blastdb_biogrid.log
+        │   ├── hostProteins_blastdb_dip.log
+        │   ├── hostProteins_blastdb_hpidb.log
+        │   ├── hostProteins_blastdb_intact.log
+        │   ├── hostProteins_blastdb_mint.log
+        │   ├── hostProteins_blastdb_virhostnet.log
+        │   ├── hostProteins_cdhit_out.log
+        │   ├── hostProteins_hmmscan.log
+        │   ├── pathogenProteins_blastdb_biogrid.log
+        │   ├── pathogenProteins_blastdb_dip.log
+        │   ├── pathogenProteins_blastdb_hpidb.log
+        │   ├── pathogenProteins_blastdb_intact.log
+        │   ├── pathogenProteins_blastdb_mint.log
+        │   ├── pathogenProteins_blastdb_virhostnet.log
+        │   ├── pathogenProteins_cdhit_out.log
+        │   └── pathogenProteins_hmmscan.log
+        └── Predictions
+            ├── Combined_PPIs
+            │   └── Combined_PPIs.csv
+            ├── Consensus_PPIs
+            │   └── interolog_domain_consensus_PPIs.csv
+            ├── Domain-based
+            │   ├── did3_PPI.csv
+            │   ├── Domain_Annotations.txt
+            │   ├── Domain_PPIs.csv
+            │   ├── domine_PPI.csv
+            │   ├── extracted_sequences
+            │   ├── human_annotations
+            │   ├── iddi_PPI.csv
+            │   └── network_analysis
+            ├── Interolog-based
+            │   ├── biogrid_PPI.csv
+            │   ├── dip_PPI.csv
+            │   ├── extracted_sequences
+            │   ├── hpidb_PPI.csv
+            │   ├── human_annotations
+            │   ├── intact_PPI.csv
+            │   ├── Interolog_Annotations.txt
+            │   ├── Interolog_PPIs.csv
+            │   ├── mint_PPI.csv
+            │   ├── network_analysis
+            │   └── virhostnet_PPI.csv
+            └── Prediction_stats.txt
       </code>
     </pre>
     
@@ -372,43 +306,6 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     });
-  </script>
-
-  <script>
-    function downloadFile(filename) {
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(getFileContent(filename)));
-        element.setAttribute('download', filename);
-        element.style.display = 'none';
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-    }
-
-    function getFileContent(filename) {
-        if (filename === 'hostProteins.fasta') {
-            return getFileFromDirectory('hostProteins.fasta');
-        } else if (filename === 'pathogenProteins.fasta') {
-            return getFileFromDirectory('pathogenProteins.fasta');
-        } else {
-            return '';
-        }
-    }
-
-    function getFileFromDirectory(filename) {
-        var fileContent = '';
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    fileContent = xhr.responseText;
-                }
-            }
-        };
-        xhr.open('GET', 'exampleData/' + filename, false);
-        xhr.send();
-        return fileContent;
-    }
   </script>
     
 </body>
